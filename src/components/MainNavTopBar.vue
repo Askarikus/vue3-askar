@@ -3,6 +3,7 @@
 		<!-- <template> -->
 		<nav class="navbar navbar-light">
 			<div class="container">
+				<router-link class="navbar-brand" :to="{name: 'globalFeed'}">conduit</router-link>
 				<ul class="nav navbar-nav pull-xs-right">
 					<li class="nav-item">
 						<RouterLink :to="{name: 'login'}" active-class="active">Sign In</RouterLink>

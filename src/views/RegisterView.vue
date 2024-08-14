@@ -1,18 +1,28 @@
 <template>
-	<div>
-		<form @submit.prevent="onSubmit">
-			<fieldset class="form-group">
-				<input class="form-control form-control-lg" type="text" placeholder="Username" v-model="username" value="bfkekhcwhry4ry3ry3894yr" />
-			</fieldset>
+	<div class="auth-page">
+		<div class="container page">
+			<div class="row">
+				<div class="col-md-6 offset-md-3 col-xs-12">
+					<h1 class="text-xs-center">Sign up</h1>
+					<p class="text-xs-center">
+						<router-link :to="{name: 'login'}">Have an account</router-link>
+					</p>
+					<form @submit.prevent="onSubmit">
+						<fieldset class="form-group">
+							<input class="form-control form-control-lg" type="text" placeholder="Username" v-model="username" value="bfkekhcwhry4ry3ry3894yr" />
+						</fieldset>
 
-			<fieldset class="form-group">
-				<input class="form-control form-control-lg" type="email" placeholder="Email" v-model="email" value="bfkekhcwhry4ry3ry3894yr@85fn7n9857.ru" />
-			</fieldset>
-			<fieldset class="form-group">
-				<input class="form-control form-control-lg" type="password" placeholder="Password" v-model="password" value="bfkekhcwhry4ry3ry38ggduy43tr435694yr" />
-			</fieldset>
-			<button class="btn btn-lg btn-primary pull-xs-right" type="submit" :disabled="isSubmitting">Sign up</button>
-		</form>
+						<fieldset class="form-group">
+							<input class="form-control form-control-lg" type="email" placeholder="Email" v-model="email" value="bfkekhcwhry4ry3ry3894yr@85fn7n9857.ru" />
+						</fieldset>
+						<fieldset class="form-group">
+							<input class="form-control form-control-lg" type="password" placeholder="Password" v-model="password" value="bfkekhcwhry4ry3ry38ggduy43tr435694yr" />
+						</fieldset>
+						<button class="btn btn-lg btn-primary pull-xs-right" type="submit" :disabled="isSubmitting">Sign up</button>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -36,7 +46,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log('submitted form')
       this.$store
         .dispatch(actionTypes.register, {
           email: this.email,
@@ -45,7 +54,7 @@ export default {
         })
         .then((user) => {
           console.log('successfully registered user', user)
-          // this.$router.push({name: 'globalFeed'})
+          this.$router.push({name: 'globalFeed'})
         })
     },
   },
