@@ -4,6 +4,7 @@ import { setItem } from '@/helpers/persistanceLocalStorage';
 const state = {
 	isSubmitting: false,
 	isLoggedIn: false,
+	validationsErrors: null,
 };
 
 export const mutationType = {
@@ -18,33 +19,46 @@ export const mutationType = {
 const mutations = {
 	[mutationType.registerStart](state) {
 		state.isSubmitting = true;
+		state.validationsErrors = null;
 	},
 	[mutationType.registerSuccess](state) {
-		(state.isSubmitting = false), (state.isLoggedIn = true);
+		state.isSubmitting = false,
+    state.isLoggedIn = true,
+    state.validationsErrors = null
 	},
-	[mutationType.registerFailure](state) {
-		state.isSubmitting = false;
+	[mutationType.registerFailure](state, payload) {
+		state.isSubmitting = false,
+    state.validationsErrors = payload
 	},
 	[mutationType.loginStart](state) {
 		state.isSubmitting = true;
+    state.validationsErrors = null
 	},
 	[mutationType.loginSuccess](state) {
-		(state.isSubmitting = false), (state.isLoggedIn = true);
+		state.isSubmitting = false,
+    state.isLoggedIn = true,
+    state.validationsErrors = null
 	},
-	[mutationType.loginFailure](state) {
-		state.isLoggedIn = false;
-		state.isSubmitting = false;
+	[mutationType.loginFailure](state, payload) {
+		state.isLoggedIn = false,
+		state.isSubmitting = false,
+    state.validationsErrors = payload
 	},
 };
 
 export const getterTypes = {
 	isLoggedIn: '[auth] isLoggedIn',
+  isAnonymous: '[auth] isAnonymous',
 };
 
 const getters = {
 	[getterTypes.isLoggedIn]: (state) => {
 		return Boolean(state.isLoggedIn);
 	},
+  [getterTypes.isAnonymous]: state => {
+    return state.isLoggedIn === false
+  },
+
 };
 
 export const actionTypes = {
@@ -64,7 +78,7 @@ const actions = {
 					resolve(response.data.user);
 				})
 				.catch((result) => {
-					// context.commit(mutationType.registerFailure, result.response.data.errors);
+					context.commit(mutationType.registerFailure, result.response.data.errors);
 				});
 		});
 	},
@@ -79,7 +93,7 @@ const actions = {
 					resolve(response.data.user);
 				})
 				.catch((result) => {
-					// context.commit(mutationType.loginFailure, result.response.data.errors);
+					context.commit(mutationType.loginFailure, result.response.data.errors);
 				});
 		});
 	},
