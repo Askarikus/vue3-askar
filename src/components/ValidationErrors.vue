@@ -19,14 +19,11 @@ export default {
   },
   computed: {
     errorMessages() {
-
-      const arrayOfProperties = Object.keys(this.validationsErrors).map((name) => {
-        const messages = this.validationsErrors[name]
-        return messages.map((message) =>
-          `${name} ${message}`
-        )
-      })
-      return arrayOfProperties.flat() || []   // flatten the array of arrays into a single array of
+      return (
+        Object.keys(this.validationsErrors).flatMap((name) =>
+          this.validationsErrors[name].map((message) => `${name} ${message}`)
+        ) || []
+      )
     },
   },
 }

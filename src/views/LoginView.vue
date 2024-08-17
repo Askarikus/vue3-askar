@@ -7,6 +7,10 @@
 					<p class="text-xs-center">
 						<router-link :to="{name: 'register'}">Need an account</router-link>
 					</p>
+          <mcv-validation-errors
+            v-if="validationsErrors"
+            :validationsErrors="validationsErrors"
+          />
 					<form @submit.prevent="onSubmit">
 						<fieldset class="form-group">
 							<input class="form-control form-control-lg" type="email" placeholder="Email" v-model="email" value="bfkekhcwhry4ry3ry3894yr@85fn7n9857.ru" />
@@ -25,6 +29,7 @@
 <script>
 import {mapState} from 'vuex'
 import {actionTypes} from '@/store/modules/auth'
+import McvValidationErrors from '@/components/ValidationErrors.vue'
 export default {
   name: 'McvLogin',
   data() {
@@ -36,7 +41,11 @@ export default {
   computed:{
     ...mapState({
       isSubmitting: (state) => state.auth.isSubmitting,
+      validationsErrors: (state) => state.auth.validationsErrors,
     }),
+  },
+  components: {
+    McvValidationErrors
   },
   methods: {
     onSubmit() {
