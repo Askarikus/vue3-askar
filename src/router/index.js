@@ -4,6 +4,8 @@ import YourFeed from '@/views/YourFeedView.vue'
 import RegisterView from '@/views/RegisterView.vue';
 import LoginView from '@/views/LoginView.vue';
 import McvArticle from '@/views/McvArticle.vue';
+import McvCreateArticle from "@/views/CreateArticleView.vue";
+import MvcProfileUser from "@/views/UserProfileView.vue";
 
 const routes = [
 	{
@@ -34,7 +36,12 @@ const routes = [
   {
     path: '/userProfile/:slug',
     name: 'userProfile',
-    component: GlobalFeed,
+    component: MvcProfileUser,
+  },
+  {
+    path: '/articles/new',
+    name: 'createArticle',
+    component: McvCreateArticle,
   },
 ];
 

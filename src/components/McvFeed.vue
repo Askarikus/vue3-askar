@@ -21,10 +21,7 @@
         <router-link :to="{name: 'article', params: {slug: article.slug }}"
         class="preview-link">
           <h1>{{ article.title }}</h1>
-
         </router-link>
-
-
       </div>
         <span> {{ article.title }}</span>
       </div>
