@@ -4,6 +4,10 @@ const register = (credentials) => {
 	return axios.post('/users', { user: credentials });
 };
 
+const update = (credentials) => {
+	return axios.put('/user', { user: credentials });
+};
+
 const login = (credentials) => {
 	return axios.post('/users/login', { user: credentials });
 };
@@ -15,5 +19,6 @@ const getCurrentUser = () => {
 export default {
 	register,
 	login,
+  update,
   getCurrentUser,
 };

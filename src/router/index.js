@@ -6,6 +6,7 @@ import LoginView from '@/views/LoginView.vue';
 import McvArticle from '@/views/McvArticle.vue';
 import McvCreateArticle from "@/views/CreateArticleView.vue";
 import MvcProfileUser from "@/views/UserProfileView.vue";
+import SettingsView from "@/views/SettingsView.vue";
 
 const routes = [
 	{
@@ -27,6 +28,11 @@ const routes = [
 		path: '/login',
 		name: 'login',
 		component: LoginView,
+	},
+	{
+		path: '/settings',
+		name: 'settings',
+		component: SettingsView,
 	},
 	{
 		path: '/articles/:slug',

@@ -14,12 +14,12 @@
                 New Article
               </router-link>
             </li>
-            <!-- <li class="nav-item">
+            <li class="nav-item">
               <router-link :to="{name: 'settings'}" active-class="active">
                 <i class="ion-gear-a">&nbsp;</i>
                 Settings
               </router-link>
-            </li> -->
+            </li>
             <li class="nav-link">
               <router-link
                 :to="{

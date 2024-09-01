@@ -13,6 +13,9 @@ export const mutationType = {
   registerStart: '[auth] registerStart',
   registerSuccess: '[auth] registerSuccess',
   registerFailure: '[auth] registerFailure',
+  updateStart: '[auth] updateStart',
+  updateSuccess: '[auth] updateSuccess',
+  updateFailure: '[auth] updateFailure',
   loginStart: '[auth] loginStart',
   loginSuccess: '[auth] loginSuccess',
   loginFailure: '[auth] loginFailure',
@@ -32,6 +35,18 @@ const mutations = {
     state.validationsErrors = null
   },
   [mutationType.registerFailure](state, payload) {
+    state.isSubmitting = false
+    state.validationsErrors = payload
+  },
+  [mutationType.updateStart](state) {
+    state.isSubmitting = true
+    state.validationsErrors = null
+  },
+  [mutationType.updateSuccess](state) {
+    state.isSubmitting = false
+    state.validationsErrors = null
+  },
+  [mutationType.updateFailure](state, payload) {
     state.isSubmitting = false
     state.validationsErrors = payload
   },
@@ -78,6 +93,7 @@ const getters = {
 
 export const actionTypes = {
   register: '[auth] register',
+  update: '[auth] update',
   login: '[auth] login',
   getCurrentUser: '[auth] getCurrentUser',
 }
@@ -96,6 +112,23 @@ const actions = {
         .catch((result) => {
           context.commit(
             mutationType.registerFailure,
+            result.response.data.errors
+          )
+        })
+    })
+  },
+  [actionTypes.update](context, credentials) {
+    return new Promise((resolve) => {
+      context.commit(mutationType.registerStart)
+      authApi
+        .update(credentials)
+        .then((response) => {
+          context.commit(mutationType.updateSuccess, response.data.user)
+          resolve(response.data.user)
+        })
+        .catch((result) => {
+          context.commit(
+            mutationType.updateFailure,
             result.response.data.errors
           )
         })
