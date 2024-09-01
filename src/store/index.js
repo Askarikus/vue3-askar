@@ -2,6 +2,7 @@ import { createStore } from 'vuex';
 import auth from '@/store/modules/auth';
 import feed from '@/store/modules/feed';
 import article from '@/store/modules/article';
+import fileUpload from '@/store/modules/fileUpload';
 
 export default createStore({
 	state: {},
@@ -11,6 +12,7 @@ export default createStore({
 	modules: {
 		auth,
     feed,
-    article
+    article,
+    fileUpload,
 	},
 });

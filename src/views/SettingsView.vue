@@ -3,14 +3,16 @@
     <div class="row">
       <div class="col-md-6 offset-md-3 col-xs-12">
         <h1 class="text-xs-center">Your Settings</h1>
+
         <form @submit.prevent="onSubmit">
           <fieldset>
             <fieldset class="form-group">
               <input
                 aria-label="Avatar picture url"
-                type="text"
                 class="form-control"
                 placeholder="URL of profile picture"
+                type="file"
+                @change="onSubmitImage($event.target.files)"
               />
             </fieldset>
             <fieldset class="form-group">
@@ -67,10 +69,13 @@
 import {mapState} from 'vuex'
 import McvValidationErrors from '@/components/ValidationErrors.vue'
 import {actionTypes} from '@/store/modules/auth'
+import {actionTypes as actionTypeFileUpload} from '@/store/modules/fileUpload'
+import ImageUpload from '@/components/ImageUpload.vue'
 export default {
   name: 'MvcSettings',
   data() {
     return {
+      image: '',
       username: '',
       bio: '',
       email: '',
@@ -78,9 +83,10 @@ export default {
     }
   },
   components: {
-    McvValidationErrors
+    McvValidationErrors,
+    ImageUpload,
   },
-  computed:{
+  computed: {
     ...mapState({
       isSubmitting: (state) => state.auth.isSubmitting,
       validationsErrors: (state) => state.auth.validationsErrors,
@@ -92,12 +98,27 @@ export default {
         .dispatch(actionTypes.update, {
           email: this.email,
           bio: this.bio,
+          image: this.image,
           username: this.username,
           password: this.password,
         })
         .then((user) => {
-          console.log('successfully registered user', user)
+          console.log('successfully updated user', user)
           this.$router.push({name: 'globalFeed'})
+        })
+    },
+    onSubmitImage(files) {
+      if (files === null) return
+      const formData = new FormData()
+      formData.append('image', files[0])
+      this.$store
+        .dispatch(actionTypeFileUpload.fileUpload, formData)
+        .then((filename) => {
+          console.log('Successfully uploaded image', filename)
+          this.image = filename
+        })
+        .catch((error) => {
+          console.error('Error uploading image', error)
         })
     },
   },
