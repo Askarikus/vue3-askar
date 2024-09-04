@@ -1,19 +1,19 @@
 import axios from '@/api/axios';
 
 const register = (credentials) => {
-	return axios.post('/users', { user: credentials });
+	return axios.axiosNoAuth.post('/users', { user: credentials });
 };
 
 const update = (credentials) => {
-	return axios.put('/user', { user: credentials });
+	return axios.axios.put('/user', { user: credentials });
 };
 
 const login = (credentials) => {
-	return axios.post('/users/login', { user: credentials });
+	return axios.axiosNoAuth.post('/users/login', { user: credentials });
 };
 
 const getCurrentUser = () => {
-  return axios.get('/user')
+  return axios.axios.get('/user')
 }
 
 export default {

@@ -1,7 +1,7 @@
 import axios from '@/api/axios';
 
 const getArticle = async (slug) => {
-  const response = await axios.get(`/articles/${slug}`)
+  const response = await axios.axios.get(`/articles/${slug}`)
   return response.data.article
 }
 
