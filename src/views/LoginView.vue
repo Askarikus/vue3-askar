@@ -13,10 +13,10 @@
           />
 					<form @submit.prevent="onSubmit">
 						<fieldset class="form-group">
-							<input class="form-control form-control-lg" type="email" placeholder="Email" v-model="email" value="bfkekhcwhry4ry3ry3894yr@85fn7n9857.ru" />
+							<input class="form-control form-control-lg" type="email" placeholder="Email" v-model="email" value="" />
 						</fieldset>
 						<fieldset class="form-group">
-							<input class="form-control form-control-lg" type="password" placeholder="Password" v-model="password" value="bfkekhcwhry4ry3ry38ggduy43tr435694yr" />
+							<input class="form-control form-control-lg" type="password" placeholder="Password" v-model="password" value="" />
 						</fieldset>
 						<button class="btn btn-lg btn-primary pull-xs-right" type="submit" :disabled="isSubmitting">Sign In</button>
 					</form>
