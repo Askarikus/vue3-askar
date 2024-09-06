@@ -9,11 +9,6 @@
               <feed-toggler />
               <mcv-feed :api-url="apiUrl" />
             </div>
-            <div class="col-md-3">
-              <div class="sidebar">
-                <mvc-popular-tags />
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -25,25 +20,23 @@
 import {mapState} from 'vuex'
 import McvFeed from '@/components/McvFeed.vue'
 import McvBanner from '@/components/McvBanner.vue'
-import MvcPopularTags from '@/components/MvcPopularTags.vue'
 import FeedToggler from '@/components/FeedToggler.vue'
 import {actionTypes} from '@/store/modules/feed'
 export default {
-  name: 'GlobalFeed',
+  name: 'TagFeed',
+  components: {
+    McvFeed,
+    McvBanner,
+    FeedToggler,
+  },
   computed: {
     ...mapState({
       isLoggedIn: (state) => state.auth.isLoggedIn,
     }),
   },
-  components: {
-    McvFeed,
-    McvBanner,
-    FeedToggler,
-    MvcPopularTags,
-  },
   data() {
     return {
-      apiUrl: '/articles',
+      apiUrl: '/articles/feed',
     }
   },
   mounted() {

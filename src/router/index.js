@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import GlobalFeed from '@/views/GlobalFeedView.vue';
 import YourFeed from '@/views/YourFeedView.vue'
+import TagFeed from '@/views/TagFeedView.vue'
 import RegisterView from '@/views/RegisterView.vue';
 import LoginView from '@/views/LoginView.vue';
 import McvArticle from '@/views/McvArticle.vue';
@@ -38,6 +39,11 @@ const routes = [
 		path: '/articles/:slug',
 		name: 'article',
 		component: McvArticle,
+	},
+	{
+		path: '/feed/:slug',
+    name: 'tag',
+    component: TagFeed,
 	},
   {
     path: '/userProfile/:slug',
