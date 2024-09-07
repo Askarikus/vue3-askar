@@ -27,28 +27,24 @@
   </div>
 </template>
 
-<script>
-import {actionTypes as articleActionType} from '@/store/modules/article'
+<script setup>
+import { computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
+import { actionTypes as articleActionType } from '@/store/modules/article'
 import McvLoader from '@/components/McvLoader.vue'
-import {mapState, mapGetters} from 'vuex'
-import article from '@/api/article'
-export default {
-  name: 'McvArticle',
-  components: {
-    McvLoader,
-  },
-  computed: {
-    ...mapState({
-      article: (state) => state.article.data,
-      isLoading: (state) => state.article.isLoading,
-    }),
-  },
-  mounted() {
-    this.$store.dispatch(articleActionType.getArticle, {
-      slug: this.$route.params.slug,
-    })
-  },
-}
+
+const store = useStore()
+const route = useRoute()
+
+const article = computed(() => store.state.article.data)
+const isLoading = computed(() => store.state.article.isLoading)
+
+onMounted(() => {
+  store.dispatch(articleActionType.getArticle, {
+    slug: route.params.slug,
+  })
+})
 </script>
 
 <style lang="scss" scoped></style>

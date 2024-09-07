@@ -30,43 +30,34 @@
 	</div>
 </template>
 
-<script>
-import {mapState} from 'vuex'
-import {actionTypes} from '@/store/modules/auth'
+<script setup>
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import { actionTypes } from '@/store/modules/auth'
 import McvValidationErrors from '@/components/ValidationErrors.vue'
 
-export default {
-  name: 'McvRegister',
-  data() {
-    return {
-      email: '',
-      username: '',
-      password: '',
-    }
-  },
-  components: {
-    McvValidationErrors
-  },
-  computed:{
-    ...mapState({
-      isSubmitting: (state) => state.auth.isSubmitting,
-      validationsErrors: (state) => state.auth.validationsErrors,
-    }),
-  },
-  methods: {
-    onSubmit() {
-      this.$store
-        .dispatch(actionTypes.register, {
-          email: this.email,
-          username: this.username,
-          password: this.password,
-        })
-        .then((user) => {
-          console.log('successfully registered user', user)
-          this.$router.push({name: 'globalFeed'})
-        })
-    },
-  },
+const store = useStore()
+const router = useRouter()
+
+const email = ref('')
+const username = ref('')
+const password = ref('')
+
+const isSubmitting = computed(() => store.state.auth.isSubmitting)
+const validationsErrors = computed(() => store.state.auth.validationsErrors)
+
+const onSubmit = () => {
+  store
+    .dispatch(actionTypes.register, {
+      email: email.value,
+      username: username.value,
+      password: password.value,
+    })
+    .then((user) => {
+      console.log('successfully registered user', user)
+      router.push({ name: 'globalFeed' })
+    })
 }
 </script>
 

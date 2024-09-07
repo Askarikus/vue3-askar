@@ -8,23 +8,22 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'McvValidationErrors',
-  props: {
-    validationsErrors: {
-      type: Object,
-      required: true,
-    },
+<script setup>
+import { computed } from 'vue'
+import { defineProps } from 'vue'
+
+const props = defineProps({
+  validationsErrors: {
+    type: Object,
+    required: true,
   },
-  computed: {
-    errorMessages() {
-      return (
-        Object.keys(this.validationsErrors).flatMap((name) =>
-          this.validationsErrors[name].map((message) => `${name} ${message}`)
-        ) || []
-      )
-    },
-  },
-}
+})
+
+const errorMessages = computed(() => {
+  return (
+    Object.keys(props.validationsErrors).flatMap((name) =>
+      props.validationsErrors[name].map((message) => `${name} ${message}`)
+    ) || []
+  )
+})
 </script>

@@ -65,63 +65,55 @@
   </div>
 </template>
 
-<script>
-import {mapState} from 'vuex'
+<script setup>
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import McvValidationErrors from '@/components/ValidationErrors.vue'
-import {actionTypes} from '@/store/modules/auth'
-import {actionTypes as actionTypeFileUpload} from '@/store/modules/fileUpload'
+import { actionTypes } from '@/store/modules/auth'
+import { actionTypes as actionTypeFileUpload } from '@/store/modules/fileUpload'
 import ImageUpload from '@/components/ImageUpload.vue'
-export default {
-  name: 'MvcSettings',
-  data() {
-    return {
-      image: '',
-      username: '',
-      bio: '',
-      email: '',
-      password: '',
-    }
-  },
-  components: {
-    McvValidationErrors,
-    ImageUpload,
-  },
-  computed: {
-    ...mapState({
-      isSubmitting: (state) => state.auth.isSubmitting,
-      validationsErrors: (state) => state.auth.validationsErrors,
-    }),
-  },
-  methods: {
-    onSubmit() {
-      this.$store
-        .dispatch(actionTypes.update, {
-          email: this.email,
-          bio: this.bio,
-          image: this.image,
-          username: this.username,
-          password: this.password,
-        })
-        .then((user) => {
-          console.log('successfully updated user', user)
-          this.$router.push({name: 'globalFeed'})
-        })
-    },
-    onSubmitImage(files) {
-      if (files === null) return
-      const formData = new FormData()
-      formData.append('image', files[0])
-      this.$store
-        .dispatch(actionTypeFileUpload.fileUpload, formData)
-        .then((filename) => {
-          console.log('Successfully uploaded image', filename)
-          this.image = filename
-        })
-        .catch((error) => {
-          console.error('Error uploading image', error)
-        })
-    },
-  },
+
+const store = useStore()
+const router = useRouter()
+
+const image = ref('')
+const username = ref('')
+const bio = ref('')
+const email = ref('')
+const password = ref('')
+
+const isSubmitting = computed(() => store.state.auth.isSubmitting)
+const validationsErrors = computed(() => store.state.auth.validationsErrors)
+
+const onSubmit = () => {
+  store
+    .dispatch(actionTypes.update, {
+      email: email.value,
+      bio: bio.value,
+      image: image.value,
+      username: username.value,
+      password: password.value,
+    })
+    .then((user) => {
+      console.log('successfully updated user', user)
+      router.push({ name: 'globalFeed' })
+    })
+}
+
+const onSubmitImage = (files) => {
+  if (files === null) return
+  const formData = new FormData()
+  formData.append('image', files[0])
+  store
+    .dispatch(actionTypeFileUpload.fileUpload, formData)
+    .then((filename) => {
+      console.log('Successfully uploaded image', filename)
+      image.value = filename
+    })
+    .catch((error) => {
+      console.error('Error uploading image', error)
+    })
 }
 </script>
 

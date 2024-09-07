@@ -49,18 +49,14 @@
 	</div>
 </template>
 
-<script>
+<script setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 import { getterTypes } from '@/store/modules/auth'
-import {mapGetters} from 'vuex'
-export default {
-  name: 'MainNavTopBar',
-  computed: {
-    ...mapGetters({
-      currentUser: getterTypes.currentUser,
-      isLoggedIn: getterTypes.isLoggedIn,
-      isAnonymous: getterTypes.isAnonymous
-    })
-  },
 
-}
+const store = useStore()
+
+const currentUser = computed(() => store.getters[getterTypes.currentUser])
+const isLoggedIn = computed(() => store.getters[getterTypes.isLoggedIn])
+const isAnonymous = computed(() => store.getters[getterTypes.isAnonymous])
 </script>

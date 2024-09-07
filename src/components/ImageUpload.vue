@@ -6,39 +6,26 @@
   </div>
 </template>
 
-<script>
-import {actionTypes} from '@/store/modules/fileUpload'
-export default {
-  name: "ImageUpload",
-  emits: ["uploaded"],
-  setup(props, context) {
-    if (files === null) return;
-    const formData = new FormData();
-    formData.append("image", files[0]);
-    // const upload = async (files: FileList | null) => {
-    //   if (files === null) return;
-    //   // const file = files.item(0);
-    //   const formData = new FormData();
-    //   formData.append("image", files[0]);
-    //   const { data } = await axios.post("upload", formData);
-    //   context.emit("uploaded", data.url);
-    // };
+<script setup>
+import { useStore } from 'vuex'
+import { actionTypes } from '@/store/modules/fileUpload'
 
-    // upload = this.$store.dispatch(actionTypes.uploadFile, formData);
-    // return upload ;
-  },
-  methods: {
-    upload(formData) {
-      this.$store
-       .dispatch(actionTypes.uploadImage, formData)
-       .then((response) => {
-          console.log('Successfully uploaded image', response)
-          this.image = response.data.file
-        })
-       .catch((error) => {
-          console.error('Error uploading image', error)
-        })
-    }
-  }
-};
+const store = useStore()
+
+const upload = (files) => {
+  if (files === null) return
+  const formData = new FormData()
+  formData.append("image", files[0])
+
+  store
+    .dispatch(actionTypes.uploadImage, formData)
+    .then((response) => {
+      console.log('Successfully uploaded image', response)
+      // Emit the uploaded event with the image URL
+      context.emit('uploaded', response.data.file)
+    })
+    .catch((error) => {
+      console.error('Error uploading image', error)
+    })
+}
 </script>

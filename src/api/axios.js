@@ -2,11 +2,11 @@ import axios from 'axios';
 // import router from '@/router';
 import {getItem} from '@/helpers/persistanceLocalStorage'
 const axiosNoAuth = axios.create();
-axios.defaults.baseURL = 'https://askar.ngrok.app';
-axiosNoAuth.defaults.baseURL = 'https://askar.ngrok.app';
+// axios.defaults.baseURL = 'https://askar.ngrok.app';
+// axiosNoAuth.defaults.baseURL = 'https://askar.ngrok.app';
 
-// axios.defaults.baseURL = 'http://localhost';
-// axiosNoAuth.defaults.baseURL = 'http://localhost';
+axios.defaults.baseURL = 'http://localhost';
+axiosNoAuth.defaults.baseURL = 'http://localhost';
 
 // axios.defaults.baseURL = 'https://api.realworld.io/api';
 // axiosNoAuth.defaults.baseURL = 'https://api.realworld.io/api';

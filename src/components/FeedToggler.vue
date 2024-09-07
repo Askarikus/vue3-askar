@@ -23,17 +23,14 @@
   </div>
 </template>
 
-<script>
-import {mapGetters} from 'vuex'
-import {getterTypes} from '@/store/modules/auth'
-export default {
-  name: 'FeedToggler',
-  computed: {
-    ...mapGetters({
-      isLoggedIn: getterTypes.isLoggedIn,
-    }),
-  },
-}
+<script setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+import { getterTypes } from '@/store/modules/auth'
+
+const store = useStore()
+
+const isLoggedIn = computed(() => store.getters[getterTypes.isLoggedIn])
 </script>
 
 <style lang="scss" scoped></style>

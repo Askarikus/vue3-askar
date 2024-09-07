@@ -16,22 +16,20 @@
   </div>
 </template>
 
-<script>
-import {mapState} from 'vuex'
-import {actionTypes} from '@/store/modules/tag.js'
-export default {
-  name: 'MvcPopularTags',
-  computed: {
-    ...mapState({
-      tags: (state) => state.tag.data,
-      isLoading: (state) => state.tag.isLoading,
-      error: (state) => state.tag.error,
-    }),
-  },
-  mounted() {
-    this.$store.dispatch(actionTypes.getPopularTags)
-  },
-}
+<script setup>
+import { computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { actionTypes } from '@/store/modules/tag.js'
+
+const store = useStore()
+
+const tags = computed(() => store.state.tag.data)
+const isLoading = computed(() => store.state.tag.isLoading)
+const error = computed(() => store.state.tag.error)
+
+onMounted(() => {
+  store.dispatch(actionTypes.getPopularTags)
+})
 </script>
 
 <style lang="scss" scoped></style>

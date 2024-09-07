@@ -29,26 +29,14 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 import McvLoader from '@/components/McvLoader.vue'
-import {mapState} from 'vuex'
-export default {
-  name: 'McvFeed',
-  props: {
-    apiUrl: {
-      type: String,
-      required: true,
-    },
-  },
-  components: {
-    McvLoader
-  },
-  computed: {
-    ...mapState({
-      isLoading: (state) => state.feed.isLoading,
-      feed: (state) => state.feed.data,
-      error: (state) => state.feed.error,
-    }),
-  },
-}
+
+const store = useStore()
+
+const isLoading = computed(() => store.state.feed.isLoading)
+const feed = computed(() => store.state.feed.data)
+const error = computed(() => store.state.feed.error)
 </script>

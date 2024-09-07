@@ -16,33 +16,22 @@
   </div>
 </template>
 
-<script>
-import {mapState} from 'vuex'
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import { useStore } from 'vuex'
 import McvFeed from '@/components/McvFeed.vue'
 import McvBanner from '@/components/McvBanner.vue'
 import FeedToggler from '@/components/FeedToggler.vue'
-import {actionTypes} from '@/store/modules/feed'
-export default {
-  name: 'TagFeed',
-  components: {
-    McvFeed,
-    McvBanner,
-    FeedToggler,
-  },
-  computed: {
-    ...mapState({
-      isLoggedIn: (state) => state.auth.isLoggedIn,
-    }),
-  },
-  data() {
-    return {
-      apiUrl: '/articles/feed',
-    }
-  },
-  mounted() {
-    this.$store.dispatch(actionTypes.getFeed, {apiUrl: this.apiUrl})
-  },
-}
+import { actionTypes } from '@/store/modules/feed'
+
+const store = useStore()
+
+const isLoggedIn = computed(() => store.state.auth.isLoggedIn)
+const apiUrl = ref('/articles/feed')
+
+onMounted(() => {
+  store.dispatch(actionTypes.getFeed, { apiUrl: apiUrl.value })
+})
 </script>
 
 <style scoped></style>

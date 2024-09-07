@@ -7,9 +7,9 @@
   </div>
 </template>
 
-<script>
-export default {
+<script setup>
+defineOptions({
   name: 'McvBanner',
-}
+})
 </script>
 <style></style>

@@ -21,35 +21,20 @@
   </div>
 </template>
 
-<script>
-import {mapState} from 'vuex'
+<script setup>
+import { onMounted, computed } from 'vue';
+import { useStore } from 'vuex'
+import {actionTypes} from '@/store/modules/feed'
 import McvFeed from '@/components/McvFeed.vue'
 import McvBanner from '@/components/McvBanner.vue'
 import MvcPopularTags from '@/components/MvcPopularTags.vue'
 import FeedToggler from '@/components/FeedToggler.vue'
-import {actionTypes} from '@/store/modules/feed'
-export default {
-  name: 'GlobalFeed',
-  computed: {
-    ...mapState({
-      isLoggedIn: (state) => state.auth.isLoggedIn,
-    }),
-  },
-  components: {
-    McvFeed,
-    McvBanner,
-    FeedToggler,
-    MvcPopularTags,
-  },
-  data() {
-    return {
-      apiUrl: '/articles',
-    }
-  },
-  mounted() {
-    this.$store.dispatch(actionTypes.getFeed, {apiUrl: this.apiUrl})
-  },
-}
+const store = useStore()
+onMounted(() => {
+  store.dispatch(actionTypes.getFeed, {apiUrl: apiUrl})
+});
+// const isLoggedIn = computed(() => store.state.auth.isLoggedIn)
+const apiUrl = '/articles';
 </script>
 
 <style scoped></style>

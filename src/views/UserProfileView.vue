@@ -18,43 +18,35 @@
         </div>
       </div>
       <div class="container">
-       <div class="row">
-        <div class="col-xs-12 col-md-10 offset-md-1">
-          <feed-toggler />
-          <mcv-feed :api-url="apiUrl" />
+        <div class="row">
+          <div class="col-xs-12 col-md-10 offset-md-1">
+            <feed-toggler />
+            <mcv-feed :api-url="apiUrl" />
+          </div>
         </div>
-          </div>
-          </div>
+      </div>
     </div>
   </div>
 </template>
 
-<script>
-import {mapGetters} from 'vuex'
-import {getterTypes} from '@/store/modules/auth'
+<script setup>
+import { computed, ref, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
+import { getterTypes } from '@/store/modules/auth'
 import McvFeed from '@/components/McvFeed.vue'
 import FeedToggler from '@/components/FeedToggler.vue'
-import {actionTypes} from '@/store/modules/feed'
-export default {
-  name: 'MvcUserProfile',
-  computed: {
-    ...mapGetters({
-      currentUser: getterTypes.currentUser,
-    })
-  },
-  components: {
-    McvFeed,
-    FeedToggler,
-  },
-  data() {
-    return {
-      apiUrl: `/articles?author=${this.$route.params.slug}`,
-    }
-  },
-  mounted() {
-    this.$store.dispatch(actionTypes.getFeed, {apiUrl: this.apiUrl})
-  },
-}
+import { actionTypes } from '@/store/modules/feed'
+
+const store = useStore()
+const route = useRoute()
+
+const currentUser = computed(() => store.getters[getterTypes.currentUser])
+const apiUrl = ref(`/articles?author=${route.params.slug}`)
+
+onMounted(() => {
+  store.dispatch(actionTypes.getFeed, { apiUrl: apiUrl.value })
+})
 </script>
 
 <style scoped></style>

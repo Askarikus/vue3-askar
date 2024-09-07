@@ -4,17 +4,15 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { defineProps } from 'vue'
 
-
-export default {
-  name: 'McvErrorsMessages',
-  props: {
-    message:{
-      type: String,
-      required: false,
-      default: 'Something error occurred'
-    }
+const props = defineProps({
+  message: {
+    type: String,
+    required: false,
+    default: 'Something error occurred'
   }
-}
+})
+</script>
 </script>
