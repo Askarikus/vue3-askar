@@ -6,6 +6,6 @@
 
 <script setup>
 defineOptions({
-  name: 'McvLoader',
+  name: 'MvcLoader',
 })
 </script>

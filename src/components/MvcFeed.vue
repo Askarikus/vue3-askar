@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mcv-loader v-if="isLoading"/>
+    <Mvc-loader v-if="isLoading"/>
     <div v-if="feed">
       <div
         class="article-preview"
@@ -32,7 +32,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import McvLoader from '@/components/McvLoader.vue'
+import MvcLoader from '@/components/MvcLoader.vue'
 
 const store = useStore()
 

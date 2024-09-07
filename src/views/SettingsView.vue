@@ -69,7 +69,7 @@
 import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import McvValidationErrors from '@/components/ValidationErrors.vue'
+import MvcValidationErrors from '@/components/ValidationErrors.vue'
 import { actionTypes } from '@/store/modules/auth'
 import { actionTypes as actionTypeFileUpload } from '@/store/modules/fileUpload'
 import ImageUpload from '@/components/ImageUpload.vue'

@@ -14,13 +14,13 @@
       </div>
     </div>
     <div class="container page">
-      <mcv-loader v-if="isLoading" />
+      <Mvc-loader v-if="isLoading" />
       <div class="row article-content">
         <div class="col-xs-12">
           <div class="ng-binding">
             <p>{{ article.body }}</p>
           </div>
-          <!-- <mcv-tag-list :tags="article.tagList"/> -->
+          <!-- <Mvc-tag-list :tags="article.tagList"/> -->
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@ import { computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import { actionTypes as articleActionType } from '@/store/modules/article'
-import McvLoader from '@/components/McvLoader.vue'
+import MvcLoader from '@/components/MvcLoader.vue'
 
 const store = useStore()
 const route = useRoute()

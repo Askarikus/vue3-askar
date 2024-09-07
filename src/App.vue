@@ -7,7 +7,7 @@
 import { RouterView } from 'vue-router'
 import MainNavTopBar from '@/components/MainNavTopBar.vue';
 export default {
-  name: 'McvApp',
+  name: 'MvcApp',
   components: {
     MainNavTopBar,
   }

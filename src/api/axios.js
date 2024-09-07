@@ -3,16 +3,11 @@ import axios from 'axios';
 import {getItem} from '@/helpers/persistanceLocalStorage'
 const axiosNoAuth = axios.create();
 
-
 axios.defaults.baseURL = import.meta.env['VITE_API_URL'];
 axiosNoAuth.defaults.baseURL = import.meta.env['VITE_API_URL'];
 
-// axios.defaults.baseURL = 'https://api.realworld.io/api';
-// axiosNoAuth.defaults.baseURL = 'https://api.realworld.io/api';
-
-
 axios.interceptors.request.use(
- config => {
+config => {
     const token = getItem('accessToken');
     const authorizationToken = token ? `Bearer ${token}` : '';
     config.headers.Authorization = authorizationToken;

@@ -9,7 +9,7 @@
 
 <script setup>
 defineOptions({
-  name: 'McvBanner',
+  name: 'MvcBanner',
 })
 </script>
 <style></style>

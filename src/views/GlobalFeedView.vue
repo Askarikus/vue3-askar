@@ -1,13 +1,13 @@
 <template>
   <div class="home">
     <div class="home-page">
-      <mcv-banner />
+      <Mvc-banner />
       <div class="container">
         <div class="container-page">
           <div class="row">
             <div class="col-md-9">
               <feed-toggler />
-              <mcv-feed :api-url="apiUrl" />
+              <Mvc-feed :api-url="apiUrl" />
             </div>
             <div class="col-md-3">
               <div class="sidebar">
@@ -25,8 +25,8 @@
 import { onMounted, computed } from 'vue';
 import { useStore } from 'vuex'
 import {actionTypes} from '@/store/modules/feed'
-import McvFeed from '@/components/McvFeed.vue'
-import McvBanner from '@/components/McvBanner.vue'
+import MvcFeed from '@/components/MvcFeed.vue'
+import MvcBanner from '@/components/MvcBanner.vue'
 import MvcPopularTags from '@/components/MvcPopularTags.vue'
 import FeedToggler from '@/components/FeedToggler.vue'
 const store = useStore()

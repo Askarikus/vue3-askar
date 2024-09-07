@@ -21,7 +21,7 @@
         <div class="row">
           <div class="col-xs-12 col-md-10 offset-md-1">
             <feed-toggler />
-            <mcv-feed :api-url="apiUrl" />
+            <Mvc-feed :api-url="apiUrl" />
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@ import { computed, ref, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import { getterTypes } from '@/store/modules/auth'
-import McvFeed from '@/components/McvFeed.vue'
+import MvcFeed from '@/components/MvcFeed.vue'
 import FeedToggler from '@/components/FeedToggler.vue'
 import { actionTypes } from '@/store/modules/feed'
 

@@ -4,8 +4,8 @@ import YourFeed from '@/views/YourFeedView.vue'
 import TagFeed from '@/views/TagFeedView.vue'
 import RegisterView from '@/views/RegisterView.vue';
 import LoginView from '@/views/LoginView.vue';
-import McvArticle from '@/views/McvArticle.vue';
-import McvCreateArticle from "@/views/CreateArticleView.vue";
+import MvcArticle from '@/views/MvcArticle.vue';
+import MvcCreateArticle from "@/views/CreateArticleView.vue";
 import MvcProfileUser from "@/views/UserProfileView.vue";
 import SettingsView from "@/views/SettingsView.vue";
 
@@ -38,7 +38,7 @@ const routes = [
 	{
 		path: '/articles/:slug',
 		name: 'article',
-		component: McvArticle,
+		component: MvcArticle,
 	},
 	{
 		path: '/feed/:slug',
@@ -53,7 +53,7 @@ const routes = [
   {
     path: '/articles/new',
     name: 'createArticle',
-    component: McvCreateArticle,
+    component: MvcCreateArticle,
   },
 ];
 

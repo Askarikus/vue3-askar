@@ -7,7 +7,7 @@
 					<p class="text-xs-center">
 						<router-link :to="{name: 'login'}">Have an account</router-link>
 					</p>
-          <mcv-validation-errors
+          <Mvc-validation-errors
             v-if="validationsErrors"
             :validationsErrors="validationsErrors"
           />
@@ -35,7 +35,7 @@ import { ref, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import { actionTypes } from '@/store/modules/auth'
-import McvValidationErrors from '@/components/ValidationErrors.vue'
+import MvcValidationErrors from '@/components/ValidationErrors.vue'
 
 const store = useStore()
 const router = useRouter()

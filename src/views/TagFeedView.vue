@@ -1,13 +1,13 @@
 <template>
   <div class="home">
     <div class="home-page">
-      <mcv-banner />
+      <Mvc-banner />
       <div class="container">
         <div class="container-page">
           <div class="row">
             <div class="col-md-9">
               <feed-toggler />
-              <mcv-feed :api-url="apiUrl" />
+              <Mvc-feed :api-url="apiUrl" />
             </div>
           </div>
         </div>
@@ -19,8 +19,8 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import McvFeed from '@/components/McvFeed.vue'
-import McvBanner from '@/components/McvBanner.vue'
+import MvcFeed from '@/components/MvcFeed.vue'
+import MvcBanner from '@/components/MvcBanner.vue'
 import FeedToggler from '@/components/FeedToggler.vue'
 import { actionTypes } from '@/store/modules/feed'
 
