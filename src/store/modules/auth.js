@@ -29,10 +29,11 @@ const mutations = {
     state.isSubmitting = true
     state.validationsErrors = null
   },
-  [mutationType.registerSuccess](state) {
+  [mutationType.registerSuccess](state, payload) {
     state.isSubmitting = false
     state.isLoggedIn = true
     state.validationsErrors = null
+    state.currentUser = payload
   },
   [mutationType.registerFailure](state, payload) {
     state.isSubmitting = false

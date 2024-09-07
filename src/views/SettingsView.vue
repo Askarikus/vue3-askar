@@ -98,6 +98,7 @@ const onSubmit = () => {
     .then((user) => {
       console.log('successfully updated user', user)
       router.push({ name: 'globalFeed' })
+      store.dispatch(actionTypes.getCurrentUser, {}).then()
     })
 }
 
