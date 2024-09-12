@@ -10,7 +10,13 @@
         <span class="date">
           {{ article.createdAt }}
         </span>
-        <button class="pull-xs-right" @click="toggleFavorite"> ADD TO FAVORITE
+        <button class="pull-xs-right"
+        @click="toggleFavorite"
+        :class="{
+        'btn-primary': article.favorited,
+        'btn-outline-primary': !article.favorited
+      }">
+          <ion-icon name="heart"></ion-icon>
           <span class="counter"> {{ article.favoritesCount }} </span>
         </button>
         <router-link :to="{name: 'article', params: {slug: article.slug }}"
@@ -25,8 +31,9 @@
 
 <script setup>
 import {useStore} from 'vuex'
-import { actionTypes } from '@/store/modules/article';
-import {defineProps } from 'vue';
+import { actionTypes  as actionTypesArticle } from '@/store/modules/article';
+import { actionTypes  as actionTypesFeed } from '@/store/modules/feed';
+import {defineProps, defineEmits } from 'vue';
 
 const store = useStore()
 
@@ -39,8 +46,9 @@ const props = defineProps({
 })
 
 const toggleFavorite = () => {
-  store.dispatch(actionTypes.favoriteArticle, { slug: props.article.slug })
-  // store.dispatch(actionTypes.getArticle, { slug: props.article.slug})
+  store.dispatch(actionTypesArticle.favoriteArticle, { slug: props.article.slug }).then(() => {
+    store.dispatch(actionTypesFeed.getFeed, {apiUrl: '/articles'});
+  })
 }
 </script>
 
