@@ -64,6 +64,9 @@ const onSubmit = () => {
     .then((user) => {
       console.log('successfully logged user', user)
       router.push({name: 'globalFeed'})
+    }).catch((error) => {
+      console.error('Failed to log user', error)
+
     })
 }
 const isSubmitting = computed(() => store.state.auth.isSubmitting)

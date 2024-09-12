@@ -63,6 +63,7 @@ const mutations = {
   [mutationType.loginFailure](state, payload) {
     state.isLoggedIn = false
     state.isSubmitting = false
+    state.isLoading = false
     state.validationsErrors = payload
   },
   [mutationType.getCurrentUserStart](state) {

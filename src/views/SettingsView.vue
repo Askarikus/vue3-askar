@@ -3,7 +3,10 @@
     <div class="row">
       <div class="col-md-6 offset-md-3 col-xs-12">
         <h1 class="text-xs-center">Your Settings</h1>
-
+        <Mvc-validation-errors
+            v-if="validationsErrors"
+            :validationsErrors="validationsErrors"
+          />
         <form @submit.prevent="onSubmit">
           <fieldset>
             <fieldset class="form-group">
@@ -54,7 +57,7 @@
             <button
               class="btn btn-lg btn-primary pull-xs-right"
               type="submit"
-              :disabled="isSubmitting"
+              :disabled="isSubmittingUser||isLoadingFile"
             >
               Update Settings
             </button>
@@ -83,7 +86,14 @@ const bio = ref('')
 const email = ref('')
 const password = ref('')
 
-const isSubmitting = computed(() => store.state.auth.isSubmitting)
+const currentUser = computed(() => store.state.auth.currentUser)
+
+email.value = currentUser.value.email
+bio.value = currentUser.value.bio
+username.value = currentUser.value.username
+
+const isSubmittingUser = computed(() => store.state.auth.isSubmitting)
+const isLoadingFile = computed(() => store.state.fileUpload.isLoading)
 const validationsErrors = computed(() => store.state.auth.validationsErrors)
 
 const onSubmit = () => {
