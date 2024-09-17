@@ -9,6 +9,11 @@
               <feed-toggler />
               <Mvc-feed :api-url="apiUrl" />
             </div>
+            <div class="col-md-3">
+              <div class="sidebar">
+                <mvc-popular-tags />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -18,16 +23,20 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useStore} from 'vuex'
+import {useRouter} from 'vue-router'
 import MvcFeed from '@/components/MvcFeed.vue'
 import MvcBanner from '@/components/MvcBanner.vue'
 import FeedToggler from '@/components/FeedToggler.vue'
+import MvcPopularTags from '@/components/MvcPopularTags.vue'
 import { actionTypes } from '@/store/modules/feed'
 
 const store = useStore()
+const router = useRouter()
 
 const isLoggedIn = computed(() => store.state.auth.isLoggedIn)
-const apiUrl = ref('/articles/feed')
+
+const apiUrl = computed(() => (`articles?tag=${router.currentRoute.value.params.slug}`))
 
 onMounted(() => {
   store.dispatch(actionTypes.getFeed, { apiUrl: apiUrl.value })

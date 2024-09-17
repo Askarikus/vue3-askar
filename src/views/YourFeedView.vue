@@ -9,6 +9,11 @@
               <feed-toggler />
               <Mvc-feed :api-url="apiUrl" />
             </div>
+            <div class="col-md-3">
+              <div class="sidebar">
+                <mvc-popular-tags />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -22,6 +27,7 @@ import { useStore } from 'vuex'
 import MvcFeed from '@/components/MvcFeed.vue'
 import MvcBanner from '@/components/MvcBanner.vue'
 import FeedToggler from '@/components/FeedToggler.vue'
+import MvcPopularTags from '@/components/MvcPopularTags.vue'
 import { actionTypes } from '@/store/modules/feed'
 
 const store = useStore()

@@ -3,6 +3,7 @@ import auth from '@/store/modules/auth';
 import feed from '@/store/modules/feed';
 import tag from '@/store/modules/tag';
 import article from '@/store/modules/article';
+import articleAddToFavorites from '@/store/modules/articleAddToFavorites';
 import fileUpload from '@/store/modules/fileUpload';
 
 export default createStore({
@@ -15,6 +16,7 @@ export default createStore({
     feed,
     tag,
     article,
+    articleAddToFavorites,
     fileUpload,
 	},
 });

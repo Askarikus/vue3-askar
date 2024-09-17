@@ -7,7 +7,7 @@
       <router-link
         v-for="tag in tags"
         :key="tag"
-        :to="{name: 'tag', params: {slug: tag}}"
+        :to="{name: 'tagFeed', params: {slug: tag}}"
         class="tag-default tag-pill"
       >
         {{ tag }}

@@ -20,6 +20,11 @@ const routes = [
     name: 'yourFeed',
     component: YourFeed,
   },
+  {
+    path: '/tags/:slug',
+    name: 'tagFeed',
+    component: TagFeed,
+  },
 	{
 		path: '/register',
 		name: 'register',
