@@ -39,7 +39,7 @@ const isLoggedIn = computed(() => store.state.auth.isLoggedIn)
 const apiUrl = computed(() => (`articles?tag=${router.currentRoute.value.params.slug}`))
 
 onMounted(() => {
-  store.dispatch(actionTypes.getFeed, { apiUrl: apiUrl.value })
+  store.dispatch(actionTypes.getFeed, { apiUrl: apiUrl.value, isLoggedIn: isLoggedIn.value })
 })
 </script>
 

@@ -32,11 +32,11 @@ export const actionTypes = {
 }
 
 const actions = {
-  [actionTypes.getFeed](context, {apiUrl}) {
+  [actionTypes.getFeed](context, {apiUrl, isLoggedIn}) {
     return new Promise((resolve) => {
       context.commit(mutationType.getFeedStart)
       feedApi
-        .getFeed(apiUrl)
+        .getFeed(apiUrl, isLoggedIn)
         .then((response) => {
           context.commit(mutationType.getFeedSuccess, response.data)
           resolve(response.data)

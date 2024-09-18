@@ -10,7 +10,7 @@
         <span class="date">
           {{ props.article.createdAt }}
         </span>
-        <MvcAddToFavorites :articleSlug="props.article.slug" :isFavorited="props.article.favorited" :count="props.article.favoritesCount"/>
+        <MvcAddToFavorites :articleSlug="props.article.slug" :isFavoritedByCurrentUser="props.article.favoritedByCurrentUser" :count="props.article.favoritesCount"/>
         <router-link :to="{name: 'article', params: {slug: props.article.slug }}"
         class="preview-link">
           <h1>{{ props.article.title }}</h1>

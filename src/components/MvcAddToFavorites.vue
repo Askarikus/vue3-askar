@@ -30,7 +30,7 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  isFavorited: {
+  isFavoritedByCurrentUser: {
     type: Boolean,
     required: false,
     default: false,
@@ -41,12 +41,15 @@ const props = defineProps({
     default: 0,
   },
 })
+
 const counter = ref(props.count)
-const isFavor = ref(props.isFavorited)
+const isFavor = ref(props.isFavoritedByCurrentUser)
+
 const isLoggedIn = computed(() => store.getters[getterTypes.isLoggedIn])
 
 const toggleFavorite = () => {
   store.dispatch(actionTypes.favoriteArticle, {slug: props.articleSlug, isFavorited:isFavor.value})
+  // if favor by current user
   if(isFavor.value) {
     counter.value--
   } else {

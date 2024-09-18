@@ -30,10 +30,11 @@ import MvcBanner from '@/components/MvcBanner.vue'
 import MvcPopularTags from '@/components/MvcPopularTags.vue'
 import FeedToggler from '@/components/FeedToggler.vue'
 const store = useStore()
+const isLoggedIn = computed(() => store.state.auth.isLoggedIn)
 onMounted(() => {
-  store.dispatch(actionTypes.getFeed, {apiUrl: apiUrl})
+  store.dispatch(actionTypes.getFeed, {apiUrl: apiUrl, isLoggedIn: isLoggedIn.value})
 });
-// const isLoggedIn = computed(() => store.state.auth.isLoggedIn)
+
 const apiUrl = '/articles';
 </script>
 
