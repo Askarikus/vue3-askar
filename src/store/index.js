@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 import auth from '@/store/modules/auth';
+import profile from '@/store/modules/profile';
 import feed from '@/store/modules/feed';
 import tag from '@/store/modules/tag';
 import article from '@/store/modules/article';
@@ -18,5 +19,6 @@ export default createStore({
     article,
     articleAddToFavorites,
     fileUpload,
+    profile
 	},
 });
