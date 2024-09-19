@@ -1,12 +1,12 @@
 <template>
-  <div class="container">
+  <div v-if="currentUser" class="container">
     <div class="row">
       <div class="col-md-6 offset-md-3 col-xs-12">
         <h1 class="text-xs-center">Your Settings</h1>
         <Mvc-validation-errors
-            v-if="validationsErrors"
-            :validationsErrors="validationsErrors"
-          />
+          v-if="validationsErrors"
+          :validationsErrors="validationsErrors"
+        />
         <form @submit.prevent="onSubmit">
           <fieldset>
             <fieldset class="form-group">
@@ -57,24 +57,26 @@
             <button
               class="btn btn-lg btn-primary pull-xs-right"
               type="submit"
-              :disabled="isSubmittingUser||isLoadingFile"
+              :disabled="isSubmittingUser || isLoadingFile"
             >
               Update Settings
             </button>
           </fieldset>
         </form>
+        <hr />
+        <button class="btn btn-outline-danger" @click="logout">Or click here to logout.</button>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+import {ref, computed} from 'vue'
+import {useStore} from 'vuex'
+import {useRouter} from 'vue-router'
 import MvcValidationErrors from '@/components/ValidationErrors.vue'
-import { actionTypes } from '@/store/modules/auth'
-import { actionTypes as actionTypeFileUpload } from '@/store/modules/fileUpload'
+import {actionTypes} from '@/store/modules/auth'
+import {actionTypes as actionTypeFileUpload} from '@/store/modules/fileUpload'
 import ImageUpload from '@/components/ImageUpload.vue'
 
 const store = useStore()
@@ -107,7 +109,7 @@ const onSubmit = () => {
     })
     .then((user) => {
       console.log('successfully updated user', user)
-      router.push({ name: 'globalFeed' })
+      router.push({name: 'globalFeed'})
       store.dispatch(actionTypes.getCurrentUser, {}).then()
     })
 }
@@ -125,6 +127,11 @@ const onSubmitImage = (files) => {
     .catch((error) => {
       console.error('Error uploading image', error)
     })
+}
+
+const logout = () => {
+  store.dispatch(actionTypes.logout, {credentials: username.value})
+  router.push({name: 'login'})
 }
 </script>
 

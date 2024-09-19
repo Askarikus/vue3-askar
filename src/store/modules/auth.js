@@ -19,6 +19,9 @@ export const mutationType = {
   loginStart: '[auth] loginStart',
   loginSuccess: '[auth] loginSuccess',
   loginFailure: '[auth] loginFailure',
+  logoutStart: '[auth] logoutStart',
+  logoutSuccess: '[auth] logoutSuccess',
+  logoutFailure: '[auth] logoutFailure',
   getCurrentUserStart : '[auth] getCurrentUserStart',
   getCurrentUserSuccess : '[auth] getCurrentUserSuccess',
   getCurrentUserFailure : '[auth] getCurrentUserFailure',
@@ -66,6 +69,14 @@ const mutations = {
     state.isLoading = false
     state.validationsErrors = payload
   },
+  [mutationType.logoutStart]() {
+  },
+  [mutationType.logoutSuccess](state) {
+    state.isLoggedIn = false
+    state.currentUser = null
+  },
+  [mutationType.logoutFailure]() {
+  },
   [mutationType.getCurrentUserStart](state) {
     state.isLoading = true
   },
@@ -97,6 +108,7 @@ export const actionTypes = {
   register: '[auth] register',
   update: '[auth] update',
   login: '[auth] login',
+  logout: '[auth] logout',
   getCurrentUser: '[auth] getCurrentUser',
 }
 
@@ -148,6 +160,21 @@ const actions = {
         })
         .catch((result) => {
           context.commit(mutationType.loginFailure, result.response.data.errors)
+        })
+    })
+  },
+  [actionTypes.logout](context, credentials) {
+    return new Promise((resolve) => {
+      context.commit(mutationType.logoutStart)
+      authApi
+        .logout(credentials)
+        .then(() => {
+          context.commit(mutationType.logoutSuccess)
+          deleteItem('accessToken')
+          resolve()
+        })
+        .catch((result) => {
+          context.commit(mutationType.logoutFailure)
         })
     })
   },

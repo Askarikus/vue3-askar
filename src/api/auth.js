@@ -12,6 +12,10 @@ const login = (credentials) => {
 	return axios.axiosNoAuth.post('/users/login', { user: credentials });
 };
 
+const logout = (credentials) => {
+	return axios.axiosNoAuth.post('/users/logout', { user: credentials });
+};
+
 const getCurrentUser = () => {
   return axios.axios.get('/user')
 }
@@ -19,6 +23,7 @@ const getCurrentUser = () => {
 export default {
 	register,
 	login,
+	logout,
   update,
   getCurrentUser,
 };
