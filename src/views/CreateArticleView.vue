@@ -30,31 +30,15 @@
                 >
                 </textarea>
               </fieldset>
-              <!-- ///-----------------------------------------------//
+
               <fieldset class="form-group">
                 <input
                   type="text"
                   class="form-control"
                   placeholder="Enter tags"
-                  v-model="tagInput"
-                  @keypress.enter.prevent="addTag(tagInput)"
+                  v-model="tagList"
                 />
-                <div class="tag-list">
-                  <span
-                    class="tag-default tag-pill"
-                    v-for="(tag, index) of article.tagList"
-                    :key="tag + index"
-                  >
-                    <ion-icon
-                      name="close-circle-outline"
-                      @click="removeTag(tag)"
-                    >
-                    </ion-icon>
-                    {{ tag }}
-                  </span>
-                </div>
               </fieldset>
-              ///-----------------------------------------------// -->
             </fieldset>
             <button
               :disabled="isSubmitting"
@@ -71,7 +55,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import {ref, computed} from 'vue'
 import {actionTypes} from '@/store/modules/article'
 import {useStore} from 'vuex'
 
@@ -80,6 +64,7 @@ const store = useStore()
 const title = ref('')
 const description = ref('')
 const body = ref('')
+const tagList = ref([])
 
 const isSubmitting = computed(() => store.state.article.isSubmitting)
 
@@ -89,13 +74,14 @@ const publish = () => {
       title: title.value,
       description: description.value,
       body: body.value,
+      tagList: [tagList.value],
     })
     .then((article) => {
       console.log('successfully create article', article)
-      // router.push({name: 'globalFeed'})
-    }).catch((error) => {
+      router.push({name: 'globalFeed'})
+    })
+    .catch((error) => {
       console.error('Failed to create article', error)
-
     })
 }
 </script>
