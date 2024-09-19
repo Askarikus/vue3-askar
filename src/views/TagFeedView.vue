@@ -22,25 +22,15 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
-import { useStore} from 'vuex'
+import { computed } from 'vue'
 import {useRouter} from 'vue-router'
 import MvcFeed from '@/components/MvcFeed.vue'
 import MvcBanner from '@/components/MvcBanner.vue'
 import FeedToggler from '@/components/FeedToggler.vue'
 import MvcPopularTags from '@/components/MvcPopularTags.vue'
-import { actionTypes } from '@/store/modules/feed'
 
-const store = useStore()
 const router = useRouter()
-
-const isLoggedIn = computed(() => store.state.auth.isLoggedIn)
-
 const apiUrl = computed(() => (`articles?tag=${router.currentRoute.value.params.slug}`))
-
-onMounted(() => {
-  store.dispatch(actionTypes.getFeed, { apiUrl: apiUrl.value, isLoggedIn: isLoggedIn.value })
-})
 </script>
 
 <style scoped></style>
