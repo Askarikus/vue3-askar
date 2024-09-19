@@ -20,7 +20,7 @@
           <div class="ng-binding">
             <p>{{ article.body }}</p>
           </div>
-          <!-- <Mvc-tag-list :tags="article.tagList"/> -->
+          <mvc-tag-list :tags="article.tagList"/>
         </div>
       </div>
     </div>
@@ -33,6 +33,7 @@ import { useStore } from 'vuex'
 import { useRoute } from 'vue-router'
 import { actionTypes as articleActionType } from '@/store/modules/article'
 import MvcLoader from '@/components/MvcLoader.vue'
+import MvcTagList from '@/components/MvcTagList.vue'
 
 const store = useStore()
 const route = useRoute()

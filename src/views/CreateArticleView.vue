@@ -74,7 +74,7 @@ const publish = () => {
       title: title.value,
       description: description.value,
       body: body.value,
-      tagList: [tagList.value],
+      tagList: tagList.value.split(',').map((tag) => tag.trim())
     })
     .then((article) => {
       console.log('successfully create article', article)
